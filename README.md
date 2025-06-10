@@ -1,8 +1,6 @@
-# Carrer-Compass
-#Bridging the education to employment
-# CareerCompass
-
+# Carrer-Compass - Bridging Education to Employment
 CareerCompass is a comprehensive job portal designed to connect job seekers with employers. The platform allows users to browse job listings, manage personal profiles, submit job applications, and review the status of their applications—all from a single, user-friendly interface.
+
 
 ## Project Features
 
