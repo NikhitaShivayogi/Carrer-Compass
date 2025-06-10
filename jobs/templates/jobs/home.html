@@ -1,0 +1,272 @@
+{% extends "jobs/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Base Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(to right, #3a7bd5, #00d2ff);
+        color: white;
+        padding: 50px 40px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 60px;
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://via.placeholder.com/1200x800') center/cover;
+        opacity: 0.2;
+        z-index: 0;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero p {
+        font-size: 22px;
+        margin-top: 10px;
+        font-weight: 400;
+    }
+
+    /* Features Section */
+    .features, .team, .faculty {
+        padding: 40px 30px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        margin-bottom: 50px;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+    }
+
+    .features:hover, .team:hover, .faculty:hover {
+        transform: scale(1.02);
+    }
+
+    .features h2, .team h2, .faculty h2 {
+        font-size: 32px;
+        color: #007bff;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .features ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        font-size: 18px;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .features li {
+        background: #f1f1f1;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+        margin-bottom: 10px;
+    }
+
+    .features li:hover {
+        background: #007bff;
+        color: white;
+    }
+
+    /* Team Section */
+    .team-members {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .member {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 250px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .member:hover {
+        transform: translateY(-10px);
+    }
+
+    .member img {
+        width: 120px;
+        height: 140px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 4px solid #007bff;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .member img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Project Guide Section */
+    .faculty {
+        background-color: #f1f1f1;
+        padding: 50px 30px;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .faculty img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid #007bff;
+        margin-bottom: 30px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .faculty img:hover {
+        transform: scale(1.1);
+    }
+
+    .faculty h3 {
+        font-size: 28px;
+        color: #333;
+        font-weight: 700;
+    }
+
+    .faculty p {
+        font-size: 20px;
+        color: #555;
+    }
+
+    /* Call to Action */
+    .cta {
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .cta a {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 35px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 20px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta a:hover {
+        background-color: #0056b3;
+        transform: translateY(-5px);
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        .team-members {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .member {
+            width: 85%;
+            margin-bottom: 20px;
+        }
+
+        .faculty img {
+            width: 160px;
+            height: 160px;
+        }
+
+        .cta a {
+            padding: 12px 25px;
+        }
+    }
+</style>
+
+<div class="hero">
+    <h1>Welcome to CareerCompass</h1>
+    <p>Your personal guide to career growth and college opportunities</p>
+</div>
+
+<div class="features">
+    <h2>About the Project</h2>
+    <p>
+        CareerCompass is designed to simplify your job search and career management by providing an easy-to-use platform tailored for freshers and students. Whether you’re looking for your first job or trying to organize your applications, CareerCompass helps you stay on track and discover relevant opportunities without the hassle.
+    </p>
+    <ul>
+        <li>User-friendly registration and personalized profiles to highlight your strengths</li>
+        <li>Responsive job listings with advanced filters to find the best fit for you</li>
+        <li>Track your job applications effortlessly with built-in status updates</li>
+        <li>Admin-managed job postings ensure fresh and verified opportunities</li>
+    </ul>
+    <p>
+        Join thousands of users who are shaping their futures with CareerCompass. Start your career journey with confidence today!
+    </p>
+</div>
+
+<div class="team">
+    <h2>Meet the Project Team</h2>
+    <div class="team-members">
+       <div class="member">
+             <img src="{% static 'jobs/images/nikita.jpeg' %}" alt="Nikhita">
+            <h3>Nikhita A Shivayogi</h3>
+            <p>BCA Student</p>
+        </div>
+        <div class="member">
+            <img src="{% static 'jobs/images/sahana.jpeg' %}" alt="Student 2">
+            <h3>Sahana B Dhuttaragi</h3>
+            <p>BCA Student</p>
+        </div>
+        <div class="member">
+             <img src="{% static 'jobs/images/rekha.jpeg' %}" alt="Student 3">
+            <h3>Rekha S Antaratani</h3>
+            <p>BCA Student</p>
+        </div>
+    </div>
+</div>
+
+<!-- Project Guide Section -->
+<div class="faculty">
+    <h2>Project Guide</h2>
+    <img src="{% static 'jobs/images/Guide.jpeg' %}" alt="Faculty">
+    <h3>Prof. ShivaKumara S Shivapuji</h3>
+    <p>Project Faculty Guide<br>Department of Computer Science</p>
+</div>
+
+<div class="cta">
+    <a href="{% url 'job_list' %}">Explore Jobs</a>
+</div>
+
+{% endblock %}

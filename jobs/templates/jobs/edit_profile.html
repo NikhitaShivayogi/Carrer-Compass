@@ -1,0 +1,87 @@
+{% extends "jobs/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow p-4">
+    <h2 class="mb-4 text-center text-primary">Edit Your Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+
+        <!-- Profile Picture and User Full Name -->
+        <div class="col-md-6 mb-3 text-center">
+          {% if profile_form.instance.profile_picture %}
+            <img src="{{ profile_form.instance.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail mb-2" style="max-width: 150px;">
+          {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile" class="img-thumbnail mb-2" style="max-width: 150px;">
+          {% endif %}
+          <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+
+          <!-- Profile picture input -->
+          <label class="form-label mt-2">Change Profile Picture</label>
+          {{ profile_form.profile_picture|add_class:"form-control" }}
+        </div>
+
+        <!-- User Info (first name, last name, username, email) -->
+        <div class="col-md-6 mb-3">
+          <label for="id_first_name" class="form-label fw-semibold">First Name</label>
+          <input type="text" name="first_name" id="id_first_name" value="{{ user.first_name }}" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="id_last_name" class="form-label fw-semibold">Last Name</label>
+          <input type="text" name="last_name" id="id_last_name" value="{{ user.last_name }}" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="id_username" class="form-label fw-semibold">Username</label>
+          <input type="text" name="username" id="id_username" value="{{ user.username }}" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="id_email" class="form-label fw-semibold">Email</label>
+          <input type="email" name="email" id="id_email" value="{{ user.email }}" class="form-control" required>
+        </div>
+
+        <!-- Bio -->
+        <div class="col-md-6 mb-3">
+          <label for="id_bio" class="form-label">Bio</label>
+          {{ profile_form.bio|add_class:"form-control"|attr:"placeholder:Tell us about yourself" }}
+        </div>
+
+        <!-- Experience Level -->
+        <div class="col-md-6 mb-3">
+          <label for="id_experience_level" class="form-label">Experience Level</label>
+          {{ profile_form.experience_level|add_class:"form-select" }}
+        </div>
+
+        <!-- Resume -->
+        <div class="col-md-6 mb-3">
+          <label for="id_resume" class="form-label">Resume <span class="text-danger">*</span></label>
+          {{ profile_form.resume|add_class:"form-control" }}
+        </div>
+
+        <!-- Location -->
+        <div class="col-md-6 mb-3">
+          <label for="{{ profile_form.location.id_for_label }}" class="form-label fw-semibold">Location</label>
+          {{ profile_form.location|add_class:"form-control" | attr:"placeholder:City, Country" }}
+        </div>
+
+        <!-- Skills -->
+        <div class="col-md-6 mb-3">
+  <label for="id_skills" class="form-label">Skills</label>
+  {{ profile_form.skills|add_class:"form-control" | attr:"placeholder:Enter skills separated by commas" }}
+</div>
+
+
+      </div>
+
+      <!-- Buttons aligned right -->
+      <div class="d-flex justify-content-end gap-3 mt-4">
+        <button type="submit" class="btn btn-success fw-semibold px-4">Save Changes</button>
+        <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary fw-semibold px-4">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div> 
+{% endblock %}

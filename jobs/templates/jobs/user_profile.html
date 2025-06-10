@@ -1,0 +1,142 @@
+{% extends "jobs/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  .profile-wrapper {
+    max-width: 600px;
+    margin: 40px auto 80px auto;
+    padding: 20px 30px;
+    background: #fff;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Container for username line and edit link - left aligned */
+  .profile-header-top {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  /* User's profile text */
+  .username-line {
+    font-size: 1.2rem;
+    color: #444;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  /* Edit profile link below username */
+  a.edit-profile-link {
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #007BFF;
+  }
+
+  a.edit-profile-link:hover {
+    color: #0056b3;
+  }
+
+  /* Center profile picture and name */
+  .profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+  }
+
+  .profile-details {
+    text-align: left;
+  }
+
+  .profile-details p {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .skills-inline {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+    background: #eee;
+    font-size: 0.95rem;
+  }
+
+  .resume-download {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+  .skills-preformatted {
+  white-space: pre-wrap; /* preserves line breaks and spaces */
+  font-family: inherit;  /* optional for consistent font */
+  background-color: #f8f9fa; /* optional, a light background */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+</style>
+
+<div class="profile-wrapper">
+
+  <div class="profile-header-top">
+    <div class="username-line">{{ profile.user.username }}'s Profile</div>
+    <a href="{% url 'edit_profile' %}" class="edit-profile-link" title="Edit your profile">Edit Profile</a>
+  </div>
+
+  <div class="profile-header">
+    {% if profile.profile_picture %}
+      <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-pic" />
+    {% else %}
+      <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="profile-pic" />
+    {% endif %}
+
+    <h1 class="profile-name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="profile-details">
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p><strong>About Me:</strong> {{ profile.bio|default:"No bio added." }}</p>
+   <p><strong>Skills:</strong></p>
+{% if profile.skills %}
+  <div class="skills-preformatted">{{ profile.skills }}</div>
+{% else %}
+  <span style="color:#999; font-style:italic;">Not specified.</span>
+{% endif %}
+
+    <p><strong>Experience:</strong> {{ profile.experience_level|default:"Not specified." }}</p>
+    <p><strong>Location:</strong> {{ profile.location|default:"Not specified." }}</p>
+  </div>
+
+  {% if profile.resume %}
+    <a href="{{ profile.resume.url }}" target="_blank" class="resume-download" title="Download Resume">Download Resume</a>
+  {% else %}
+    <p style="margin-top: 20px; font-style: italic; color: #666;">Resume not uploaded.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

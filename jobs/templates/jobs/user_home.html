@@ -1,0 +1,32 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+<div class="card user-home" style="padding: 30px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    
+    <h2>Welcome, {{ user.first_name|default:user.username }}! 👋</h2>
+
+    {% if profile.profile_picture %}
+        <div class="profile-picture" style="margin: 20px auto;">
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" 
+                 style="max-height: 150px; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 20px; text-align: left;">
+        {% if profile.bio %}
+            <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        {% endif %}
+        {% if profile.current_company %}
+            <p><strong>Current Company:</strong> {{ profile.current_company }}</p>
+        {% endif %}
+        {% if profile.skills %}
+            <p><strong>Skills:</strong> {{ profile.skills }}</p>
+        {% endif %}
+        {% if profile.location %}
+            <p><strong>Location:</strong> {{ profile.location }}</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary" style="margin-top: 20px;">Edit My Profile</a>
+</div>
+{% endblock %}
